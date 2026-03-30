@@ -6,9 +6,46 @@
     <title>Rick and Morty</title>
     <link rel="icon" href="src/assets/icon.svg" type="image/icon">
     <link rel="stylesheet" href="style.css">
-    <script src="src/main.js" type="module"></script>
+    <script src="src/main.js" defer></script>
 </head>
 <body>
-    
+    <header>
+        <div id="logo-titulo">
+            <img src="src/assets/icon.svg" alt="Ícone do site">
+            <h1>Rick and Morty Explorer</h1>
+        </div>
+
+        <p id="data-hora-header"></p>
+    </header>
+
+    <div id="container-principal">
+        <aside>
+            <div id="busca">
+                <label for="busca">Busca</label>
+                <input type="text" name="busca" id="campo-busca" placeholder="Buscar por nome...">
+            </div>
+
+            <div id="filtros">
+                <label for="status">Filtros</label>
+                <select name="status" id="status">
+                    <option value="todos">Todos os status</option>
+                </select>
+                <select name="especies" id="especies">
+                    <option value="todos">Todas as espécies</option>
+                </select>
+                <select name="generos" id="generos">
+                    <option value="todos">Todos os gêneros</option>
+                </select>
+                <button>Limpar filtros</button>
+            </div>
+
+            <div id="legenda">
+                legenda aqui
+            </div>
+        </aside>
+        <main>
+            <div class="card-personagem"></div>
+        </main>
+    </div>
 </body>
 </html>
