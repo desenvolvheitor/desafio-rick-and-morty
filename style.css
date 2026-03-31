@@ -1,9 +1,12 @@
 :root {
     --primary-color: #ffffff;
     --secondary-color: #F6F6F6;
-    --tertiary-color: #E8E8E8;
+    --tertiary-color: #c7c7c7;
     --text-color: #000000;
     --card-radius: 14px;
+    --alive-color: #cbfdcb;
+    --dead-color: #ffadaa;
+    --unknown-color: #b3b3b3;
 }
 
 * {
@@ -70,21 +73,38 @@ aside div {
     flex-direction: column;
 }
 
+.campo-filtro {
+    margin-bottom: 10px;
+    height: 40px;
+}
+
 main {
     min-height: 0;
     max-height: inherit;
 }
 
 #galeria-personagens {
+    background-color: var(--secondary-color);
     min-height: 100%;
     padding: 30px 40px;
-    background-color: var(--secondary-color);
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     align-content: start;
     overflow-y: auto;
+}
+
+@keyframes entradaSuave {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .card-personagem {
@@ -94,6 +114,7 @@ main {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    animation: entradaSuave 0.1s ease-out forwards;
 }
 
 .card-personagem:hover {
@@ -104,18 +125,49 @@ main {
     width: 100%;
 }
 
-.informacoes-personagem {
+.informacoes-card-personagem {
     display: flex;
     flex-direction: column;
     gap: 4px;
     padding: 10px 12px;
     border: 1px solid var(--tertiary-color);
+    border-top: none;
     border-radius: 0 0 var(--card-radius) var(--card-radius);
 }
 
-.informacoes-personagem h2 {
+.informacoes-card-personagem h3 {
     font-size: 18px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+#modal-personagem {
+    position: absolute;
+    border-radius: 14px;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    width: 20vw;
+    /* height: 70vh; */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-color);
+    transform: translate(-50%, -50%);
+    border: none;
+}
+
+#modal-personagem img{
+    /* height: 100%; */
+    height: 100%;
+}
+
+#informacoes-modal-personagem {
+    width: 100%;
+    padding: 50px;
+}
+
+#informacoes-modal-personagem p{
+    padding: 10px 0;
+    border-bottom: 1px solid var(--tertiary-color);
 }
