@@ -42,7 +42,44 @@ camposFiltro.forEach((campo) => {
 
     })
 })
+
+let informacoesUltimaRequisicao = ""
 async function executarBusca() {
+    document.querySelector("main img").style.display = "block"
     const dados = await buscarPersonagens(filtros)
+    document.querySelector("main img").style.display = "none"
+    informacoesUltimaRequisicao = dados.info
     renderizarGaleria(dados.results)
+    console.log(`Página atual: ${filtros.page}\n Total de páginas: ${informacoesUltimaRequisicao.pages}`)
 }
+
+executarBusca()
+
+botaoPagAnterior.addEventListener("click", () => { 
+    if (filtros.page > 1) {
+        filtros.page--
+        executarBusca()
+        document.getElementById("paginas").textContent = `Página ${filtros.page} de ${informacoesUltimaRequisicao.pages}`
+    }
+})
+
+botaoProximaPag.addEventListener("click", () => { 
+    if (filtros.page < informacoesUltimaRequisicao.pages) {
+        filtros.page++
+        executarBusca()
+        document.getElementById("paginas").textContent = `Página ${filtros.page} de ${informacoesUltimaRequisicao.pages}`
+    }
+})
+
+const botaoLimparFiltros = document.querySelector("form button")
+botaoLimparFiltros.addEventListener("click", (event) => {
+    event.preventDefault()
+    const formulario = document.querySelector("form")
+    formulario.reset()
+    filtros.page =  1
+    filtros.name =  ""
+    filtros.status =  ""
+    filtros.species =  ""
+    filtros.gender =  ""
+    executarBusca()
+})
