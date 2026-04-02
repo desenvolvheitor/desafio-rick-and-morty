@@ -9,38 +9,39 @@ setInterval(() => {
     dataHoraHeader.textContent = `${hoje.toLocaleString("pt-br", { dateStyle: "long", timeStyle: "medium" }).replace("às", "•")}` 
 }, 1000)
 
+const camposFiltro = document.querySelectorAll(".campo-filtro")
+const botaoProximaPag = document.getElementById("proxima-pagina")
+const botaoPagAnterior = document.getElementById("pagina-anterior")
+
 const filtros = {
+    page: 1,
     name: "",
     status: "",
     species: "",
     gender: "",
-};
+}
 
-const campoBusca = document.getElementById("campo-busca")
-const campoStatus = document.getElementById("status")
-const campoEspecie = document.getElementById("especies")
-const campoGenero = document.getElementById("generos")
-
-campoBusca.addEventListener("change", () => { 
-    filtros.name = campoBusca.value
+const aplicarFiltro = (event) => {
+    filtros.page = 1
+    const chave = event.target.name
+    filtros[chave] = event.target.value
     executarBusca()
- })
+}
 
-campoStatus.addEventListener("change", () => { 
-    filtros.status = campoStatus.value
-    executarBusca()
- })
+let timer
+camposFiltro.forEach((campo) => {
+    campo.addEventListener("input", (event) => {
+        if (event.target.type == "text") {
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                aplicarFiltro(event)
+            }, 500)
+        } else {
+            aplicarFiltro(event)
+        }
 
-campoEspecie.addEventListener("change", () => { 
-    filtros.species = campoEspecie.value
-    executarBusca()
- })
-
-campoGenero.addEventListener("change", () => { 
-    filtros.gender = campoGenero.value
-    executarBusca()
- })
-
+    })
+})
 async function executarBusca() {
     const dados = await buscarPersonagens(filtros)
     renderizarGaleria(dados.results)
