@@ -98,18 +98,6 @@ main {
     align-content: start;
 }
 
-@keyframes entradaSuave {
-    from {
-        opacity: 0;
-        transform: translateY(15px) scale(0.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
 .card-personagem {
     width: 100%;
     background-color: var(--primary-color);
@@ -117,11 +105,12 @@ main {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    animation: entradaSuave 0.1s ease-out forwards;
+    transition: ease 0.2s;
 }
 
 .card-personagem:hover {
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 .foto-personagem {
