@@ -1,5 +1,3 @@
-import { consumirApi } from "../api/rickAndMorty.js";
-
 const modalPersonagem = document.getElementById("modal-personagem")
 
 export async function abrirModalPersonagem(idPersonagem) {
@@ -13,6 +11,9 @@ export async function abrirModalPersonagem(idPersonagem) {
         <p>Origem: ${dados.origin.name}</p>
         <p>Localização: ${dados.location.name}</p>
         <p>Episódios: ${dados.episode.length}</p>
-        <button onclick="${modalPersonagem.close()}">Fechar</button>
-    </div>`
+        </div>
+        <div id="botao-fechar-modal" aria-text="Fechar">&#x2715;</div>`
+    modalPersonagem.showModal()
+    const botaoFecharModal = document.getElementById("botao-fechar-modal")
+    botaoFecharModal.onclick =  () => { modalPersonagem.close() }
 }
