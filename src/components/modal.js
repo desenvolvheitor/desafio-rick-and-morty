@@ -1,7 +1,9 @@
+import { buscarPersonagemPorId } from "../api/rickAndMorty.js"
+
 const modalPersonagem = document.getElementById("modal-personagem")
 
-export async function abrirModalPersonagem(idPersonagem) {
-    const dados = await consumirApi(`https://rickandmortyapi.com/api/character/${idPersonagem}`)
+export async function abrirModalPersonagem(id) {
+    const dados = await buscarPersonagemPorId(id)
     modalPersonagem.innerHTML = `<img src="${dados.image}">`
     modalPersonagem.innerHTML += `<div id="informacoes-modal-personagem">
         <h2>${dados.name}</h2>
