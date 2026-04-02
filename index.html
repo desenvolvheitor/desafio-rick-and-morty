@@ -20,48 +20,51 @@
 
     <div id="container-principal">
         <aside>
-            <div id="busca">
-                <label for="busca">Busca</label>
-                <input type="text" name="busca" id="campo-busca" class="campo-filtro" placeholder="Buscar por nome...">
-            </div>
-
-            <div id="filtros">
-                <label for="status">Filtros</label>
-                <select name="status" id="status" class="campo-filtro">
-                    <option value="">Todos os status</option>
-                    <option value="alive">Alive</option>
-                    <option value="dead">Dead</option>
-                    <option value="unknown">Unknown</option>
-                </select>
-
-                <select name="especies" id="especies" class="campo-filtro">
-                    <option value="">Todas as espécies</option>
-                    <option value="alien">Alien</option>
-                    <option value="animal">Animal</option>
-                    <option value="cronenberg">Cronenberg</option>
-                    <option value="disease">Disease</option>
-                    <option value="human">Human</option>
-                    <option value="humanoid">Humanoid</option>
-                    <option value="mythological creature">Mythological Creature</option>
-                    <option value="poopybutthole">Poopybutthole</option>
-                    <option value="robot">Robot</option>
-                    <option value="unknown">Unknown</option>
-                </select>
+            <form>
+                <div id="busca">
+                    <label for="busca">Busca</label>
+                    <input type="text" name="name" id="campo-busca" class="campo-filtro" placeholder="Buscar por nome...">
+                </div>
+                <div id="filtros">
+                    <label for="status">Filtros</label>
+                    <select name="status" id="status" class="campo-filtro">
+                        <option value="">Todos os status</option>
+                        <option value="alive">Alive</option>
+                        <option value="dead">Dead</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <select name="species" id="especies" class="campo-filtro">
+                        <option value="">Todas as espécies</option>
+                        <option value="alien">Alien</option>
+                        <option value="animal">Animal</option>
+                        <option value="cronenberg">Cronenberg</option>
+                        <option value="disease">Disease</option>
+                        <option value="human">Human</option>
+                        <option value="humanoid">Humanoid</option>
+                        <option value="mythological creature">Mythological Creature</option>
+                        <option value="poopybutthole">Poopybutthole</option>
+                        <option value="robot">Robot</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
                 
-                <select name="generos" id="generos" class="campo-filtro">
-                    <option value="">Todos os gêneros</option>
-                    <option value="female">Female</option>
-                    <option value="genderless">Genderless</option>
-                    <option value="male">Male</option>
-                    <option value="unknown">Unknown</option>
-                </select>
-                <button id="botao-limpar-filtros">Limpar filtros</button>
-            </div>
+                    <select name="gender" id="generos" class="campo-filtro">
+                        <option value="">Todos os gêneros</option>
+                        <option value="female">Female</option>
+                        <option value="genderless">Genderless</option>
+                        <option value="male">Male</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <button id="botao-limpar-filtros">Limpar filtros</button>
+                </div>
+            </form>
         </aside>
 
         <main>
-            <ul id="galeria-personagens"></ul>
+            <img src="https://i.giphy.com/i2tLw5ZyikSFdkeGHT.webp" alt="" style="display: none;">
             <p id="paginas"></p>
+            <button id="pagina-anterior">Página anterior</button>
+            <button id="proxima-pagina">Próxima página</button>
+            <ul id="galeria-personagens"></ul>
         </main>
     </div>
 
