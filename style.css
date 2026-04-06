@@ -73,7 +73,13 @@ aside {
     max-height: inherit;
 }
 
-aside div {
+aside form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+aside form div {
     display: flex;
     flex-direction: column;
 }
@@ -82,10 +88,15 @@ aside div {
     margin-top: 8px;
     height: 40px;
     border-radius: 6px;
+    background-color: var(--quaternary-color);
+    color: var(--ter-text-color);
 }
 
-#filtros button {
+#botao-limpar-filtros {
     margin-top: 8px;
+    height: 50px;
+    background-color: #0F1115;
+    color: var(--ter-text-color);
 }
 
 main {
@@ -116,6 +127,7 @@ main {
 .card-personagem:hover {
     cursor: pointer;
     transform: scale(1.05);
+    border: solid 1px var(--alive-color);
 }
 
 .foto-personagem {
@@ -136,8 +148,18 @@ main {
     font-family: "Orbitron", sans-serif;
     font-size: 18px;
     white-space: nowrap;
-    overflow: hidden;    
+    overflow: hidden;
     text-overflow: ellipsis;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 #modal-personagem {
@@ -149,8 +171,26 @@ main {
     max-height: 95vh;
     background-color: var(--primary-color);
     transform: translate(-50%, -50%);
-    border: none;
     text-wrap: wrap;
+    color: var(--text-color);
+    border: none;
+    outline: none;
+}
+
+@keyframes fundoModal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#modal-personagem::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    animation: fundoModal 0.2s ease-out forwards;
 }
 
 #modal-personagem[open] {
@@ -158,7 +198,7 @@ main {
     flex-direction: column;
 }
 
-#modal-personagem img{
+#modal-personagem img {
     height: 100%;
 }
 
@@ -192,7 +232,7 @@ main {
     align-items: center;
     justify-content: center;
     color: var(--primary-color);
-    text-shadow:0 0 10px var(--text-color);
+    text-shadow: 0 0 10px var(--text-color);
 }
 
 #botao-fechar-modal:hover {
