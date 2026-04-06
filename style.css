@@ -4,7 +4,7 @@
     --tertiary-color: #343434;
     --quaternary-color: #1d1f26;
     --text-color: #ffffff;
-    --ter-text-color: #828897;
+    --sec-text-color: #828897;
     --card-radius: 14px;
     --alive-color: #4afd65;
     --dead-color: #d4312d;
@@ -23,6 +23,15 @@ body {
     height: 100dvh;
     color: var(--text-color);
     overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    background-color: var(--secondary-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--tertiary-color);
+    border-radius: 10px;
 }
 
 header {
@@ -54,6 +63,7 @@ header {
 }
 
 #data-hora-header {
+    text-align: right;
     font-size: 14px;
 }
 
@@ -89,14 +99,40 @@ aside form div {
     height: 40px;
     border-radius: 6px;
     background-color: var(--quaternary-color);
-    color: var(--ter-text-color);
+    color: var(--sec-text-color);
+    border:none;
+    border: 1px solid var(--tertiary-color);
+}
+
+.campo-filtro:hover {
+    cursor: pointer;
+    border: 1px solid var(--alive-color);
+    transition: 0.2s ease;
+}
+
+.campo-filtro:focus, .campo-filtro:active, .campo-filtro::picker {
+    border: 1px solid var(--alive-color);
+    transition: 0.2s ease;
 }
 
 #botao-limpar-filtros {
     margin-top: 8px;
     height: 50px;
-    background-color: #0F1115;
-    color: var(--ter-text-color);
+    background-color: var(--secondary-color);
+    color: var(--sec-text-color);
+    border-radius: 6px;
+    border: 1px solid var(--tertiary-color);
+}
+
+#botao-limpar-filtros:hover {
+    color: var(--dead-color);
+    border: 1px solid var(--dead-color);
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+#campo-busca:hover {
+    cursor: text;
 }
 
 main {
@@ -128,6 +164,10 @@ main {
     cursor: pointer;
     transform: scale(1.05);
     border: solid 1px var(--alive-color);
+}
+
+.card-personagem:hover h3{
+    color: var(--alive-color);
 }
 
 .foto-personagem {
