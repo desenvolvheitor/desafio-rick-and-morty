@@ -26,14 +26,12 @@ export function renderizarGaleria(listaPersonagens) {
                     statusEmoji = "&#x2753;"
                     break
             }
-
-            card.style.backgroundColor = statusColor
             
             card.innerHTML = `<img await src="${dado.image}" alt="" class="foto-personagem">
             <div class="informacoes-card-personagem">
                 <h3>${dado.name}</h3>
                 <p>${dado.species}</p>
-                <p>${statusEmoji} ${dado.status}</p>
+                <p style="color: ${statusColor};">${statusEmoji} ${dado.status}</p>
             </div>`
                 
             galeriaPersonagens.appendChild(card)
