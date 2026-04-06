@@ -1,5 +1,6 @@
 import { buscarPersonagens } from "./api/rickAndMorty.js"
 import { renderizarGaleria } from "./components/card.js"
+import { atualizarPaginacao } from "./components/paginacao.js"
 
 // Atualização automática de data e hora
 const dataHoraHeader = document.getElementById("data-hora-header")
@@ -43,6 +44,18 @@ camposFiltro.forEach((campo) => {
     })
 })
 
+
+/* PAGINAÇÃO
+
+Primeira página: 1
+Início do bloco central: filtros.page - 2
+Página atual: filtros.page
+Fim do bloco central: filtros.page + 2
+Última página: informacoesUltimaRequisicao.pages
+
+*/
+
+
 let informacoesUltimaRequisicao = ""
 async function executarBusca() {
     document.querySelector("main img").style.display = "block"
@@ -51,6 +64,7 @@ async function executarBusca() {
     informacoesUltimaRequisicao = dados.info
     renderizarGaleria(dados.results)
     document.getElementById("paginas").innerHTML = `Página <input type="number" value=${filtros.page} style="width: 24px" min=1 max=${informacoesUltimaRequisicao.pages}> de ${informacoesUltimaRequisicao.pages}`
+    console.log(atualizarPaginacao(Number(filtros.page), Number(informacoesUltimaRequisicao.pages)))
 }
 
 document.getElementById("paginas").addEventListener("change", () => {
