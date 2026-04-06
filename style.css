@@ -19,7 +19,7 @@
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
     height: 100dvh;
     color: var(--text-color);
     overflow: hidden;
@@ -47,7 +47,10 @@ header {
 
 #logo-titulo h1 {
     font-weight: bolder;
+    text-shadow: var(--alive-color) 0 0 8px;
     font-size: clamp(14px, 1.5vw, 20px);
+    color: var(--alive-color);
+    font-family: "Orbitron", sans-serif;
 }
 
 #data-hora-header {
@@ -130,6 +133,7 @@ main {
 }
 
 .informacoes-card-personagem h3 {
+    font-family: "Orbitron", sans-serif;
     font-size: 18px;
     white-space: nowrap;
     overflow: hidden;    
@@ -163,7 +167,13 @@ main {
     padding: 10px 20px;
 }
 
-#informacoes-modal-personagem p{
+#informacoes-modal-personagem h2 {
+    font-family: "Orbitron", sans-serif;
+    color: var(--alive-color);
+    text-shadow: var(--alive-color) 0 0 8px;
+}
+
+#informacoes-modal-personagem p {
     padding: 10px 0;
     border-bottom: 1px solid var(--tertiary-color);
     overflow: auto;
