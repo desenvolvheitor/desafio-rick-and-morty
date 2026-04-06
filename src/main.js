@@ -50,8 +50,13 @@ async function executarBusca() {
     document.querySelector("main img").style.display = "none"
     informacoesUltimaRequisicao = dados.info
     renderizarGaleria(dados.results)
-    console.log(`Página atual: ${filtros.page}\n Total de páginas: ${informacoesUltimaRequisicao.pages}`)
+    document.getElementById("paginas").innerHTML = `Página <input type="number" value=${filtros.page} style="width: 24px" min=1 max=${informacoesUltimaRequisicao.pages}> de ${informacoesUltimaRequisicao.pages}`
 }
+
+document.getElementById("paginas").addEventListener("change", () => {
+    filtros.page = document.querySelector("#paginas input").value
+    executarBusca()
+})
 
 executarBusca()
 
@@ -59,7 +64,6 @@ botaoPagAnterior.addEventListener("click", () => {
     if (filtros.page > 1) {
         filtros.page--
         executarBusca()
-        document.getElementById("paginas").textContent = `Página ${filtros.page} de ${informacoesUltimaRequisicao.pages}`
     }
 })
 
@@ -67,7 +71,6 @@ botaoProximaPag.addEventListener("click", () => {
     if (filtros.page < informacoesUltimaRequisicao.pages) {
         filtros.page++
         executarBusca()
-        document.getElementById("paginas").textContent = `Página ${filtros.page} de ${informacoesUltimaRequisicao.pages}`
     }
 })
 
