@@ -1,12 +1,14 @@
 :root {
-    --primary-color: #ffffff;
-    --secondary-color: #F6F6F6;
-    --tertiary-color: #c7c7c7;
-    --text-color: #000000;
+    --primary-color: #181a21;
+    --secondary-color: #0f1115;
+    --tertiary-color: #343434;
+    --quaternary-color: #1d1f26;
+    --text-color: #ffffff;
+    --ter-text-color: #828897;
     --card-radius: 14px;
-    --alive-color: #cbfdcb;
-    --dead-color: #ffadaa;
-    --unknown-color: #b3b3b3;
+    --alive-color: #4afd65;
+    --dead-color: #d4312d;
+    --unknown-color: #828897;
 }
 
 * {
