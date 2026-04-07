@@ -25,7 +25,7 @@
         <aside>
             <form>
                 <div id="busca">
-                    <label for="busca">Busca</label>
+                    <label for="name">Busca</label>
                     <input type="text" name="name" id="campo-busca" class="campo-filtro" placeholder="Buscar por nome...">
                 </div>
                 <div id="filtros">
@@ -57,15 +57,21 @@
                         <option value="male">Male</option>
                         <option value="unknown">Unknown</option>
                     </select>
-                    <button id="botao-limpar-filtros">Limpar filtros</button>
+                    <button type="button" id="botao-limpar-filtros">Limpar filtros</button>
                 </div>
             </form>
         </aside>
 
         <main>
-            <img src="https://i.giphy.com/i2tLw5ZyikSFdkeGHT.webp" alt="" style="display: none;">
+            <img src="https://i.giphy.com/i2tLw5ZyikSFdkeGHT.webp" id="gif-carregamento" alt="Caregando..." style="display: none;">
             <ul id="galeria-personagens"></ul>
-            <p id="paginas"></p>
+            <div id="paginacao">
+                <p id="paginas"></p>
+                <div id="botoes-paginacao">
+                    <button id="pagina-anterior" class="botao-paginacao">Página Anterior</button>
+                    <button id="proxima-pagina" class="botao-paginacao">Próxima página</button>
+                </div>
+            </div>
         </main>
     </div>
 
