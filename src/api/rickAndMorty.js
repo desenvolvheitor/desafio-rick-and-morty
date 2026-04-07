@@ -5,13 +5,14 @@ export async function buscarPersonagens(filtros) {
         const resposta = await fetch(url)
 
         if (!resposta.ok) {
-            throw new Error(`Erro na rede: ${resposta.status}`)
+            return resposta.status
         }
 
         const dados = await resposta.json()
         return dados
     } catch (erro) {
         console.error(`Erro ao buscar dados: ${erro}`)
+        return resposta.status
     }
 }
 
