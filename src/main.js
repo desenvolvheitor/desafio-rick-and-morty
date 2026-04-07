@@ -1,8 +1,6 @@
 import { buscarPersonagens } from "./api/rickAndMorty.js"
 import { renderizarGaleria } from "./components/card.js"
-import { atualizarPaginacao } from "./components/paginacao.js"
 
-// Atualização automática de data e hora
 const dataHoraHeader = document.getElementById("data-hora-header")
 
 setInterval(() => {
@@ -11,8 +9,11 @@ setInterval(() => {
 }, 1000)
 
 const camposFiltro = document.querySelectorAll(".campo-filtro")
+const secaoPaginacao = document.getElementById("paginacao")
 const botaoProximaPag = document.getElementById("proxima-pagina")
 const botaoPagAnterior = document.getElementById("pagina-anterior")
+const formularioFiltros = document.querySelector("form")
+const galeriaPersonagens = document.getElementById("galeria-personagens")
 
 const filtros = {
     page: 1,
@@ -40,42 +41,60 @@ camposFiltro.forEach((campo) => {
         } else {
             aplicarFiltro(event)
         }
-
     })
 })
 
-
-/* PAGINAÇÃO
-
-Primeira página: 1
-Início do bloco central: filtros.page - 2
-Página atual: filtros.page
-Fim do bloco central: filtros.page + 2
-Última página: informacoesUltimaRequisicao.pages
-
-*/
-
+formularioFiltros.addEventListener("submit", (event) => {
+    event.preventDefault()
+})
 
 let informacoesUltimaRequisicao = ""
 async function executarBusca() {
+    galeriaPersonagens.innerHTML = ""
+    secaoPaginacao.style.display = "none"
     document.querySelector("main img").style.display = "block"
-    const dados = await buscarPersonagens(filtros)
-    document.querySelector("main img").style.display = "none"
-    informacoesUltimaRequisicao = dados.info
-    renderizarGaleria(dados.results)
-    document.getElementById("paginas").innerHTML = `Página <input type="number" value=${filtros.page} style="width: 24px" min=1 max=${informacoesUltimaRequisicao.pages}> de ${informacoesUltimaRequisicao.pages}`
-    console.log(atualizarPaginacao(Number(filtros.page), Number(informacoesUltimaRequisicao.pages)))
-}
+    try {
+        const [dados, _] = await Promise.all([
+            buscarPersonagens(filtros),
+            new Promise(resolve => setTimeout(resolve, 500))
+        ])
 
-document.getElementById("paginas").addEventListener("change", () => {
-    filtros.page = document.querySelector("#paginas input").value
-    executarBusca()
-})
+        if (typeof dados === "number") {
+            // INSERIR AQUI O QUE FAZER QUANDO NÃO RETORNAR RESULTADO VÁLIDO
+        } else {
+            informacoesUltimaRequisicao = dados.info
+            renderizarGaleria(dados.results)
+            document.getElementById("paginas").textContent = `Página ${filtros.page} de ${informacoesUltimaRequisicao.pages}`
+            if (informacoesUltimaRequisicao.pages <= 1) {
+                secaoPaginacao.style.display = "none"
+            } else {
+                secaoPaginacao.style.display = "flex"
+
+                if (filtros.page <= 1) {
+                    botaoPagAnterior.disabled = true
+                } else {
+                    botaoPagAnterior.disabled = false
+                }
+
+                if (filtros.page >= informacoesUltimaRequisicao.pages) {
+                    botaoProximaPag.disabled = true
+                } else {
+                    botaoProximaPag.disabled = false
+                }
+            }
+        }
+    } catch {
+        // INSERIR AQUI O QUE FAZER COM PROBLEMAS DE REDE
+    } finally {
+        document.querySelector("main img").style.display = "none"
+    }
+}
 
 executarBusca()
 
 botaoPagAnterior.addEventListener("click", () => { 
     if (filtros.page > 1) {
+        botaoPagAnterior.disabled = false
         filtros.page--
         executarBusca()
     }
@@ -83,12 +102,13 @@ botaoPagAnterior.addEventListener("click", () => {
 
 botaoProximaPag.addEventListener("click", () => { 
     if (filtros.page < informacoesUltimaRequisicao.pages) {
+        botaoProximaPag.disabled = false
         filtros.page++
         executarBusca()
     }
 })
 
-const botaoLimparFiltros = document.querySelector("form button")
+const botaoLimparFiltros = document.getElementById("botao-limpar-filtros")
 botaoLimparFiltros.addEventListener("click", (event) => {
     event.preventDefault()
     const formulario = document.querySelector("form")
