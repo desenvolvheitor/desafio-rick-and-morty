@@ -7,7 +7,7 @@ export function renderizarGaleria(listaPersonagens) {
         listaPersonagens.forEach((dado, indice) => {
             let card = document.createElement("li")
             card.setAttribute("class", "card-personagem")
-            card.onclick = () => abrirModalPersonagem(dado.id)
+            card.onclick = () => abrirModalPersonagem(dado)
             card.style = `animation-delay: ${indice * 0.015}s`
 
             let statusColor
