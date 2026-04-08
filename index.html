@@ -14,6 +14,7 @@
 <body>
     <header>
         <div id="logo-titulo">
+            <button id="menu-hamburguer">&#9776;</button>
             <img src="src/assets/icon.svg" alt="Ícone do site">
             <h1>Rick and Morty Explorer</h1>
         </div>
@@ -63,9 +64,10 @@
         </aside>
 
         <main>
-            <img src="https://i.giphy.com/i2tLw5ZyikSFdkeGHT.webp" id="gif-carregamento" alt="Caregando..." style="display: none;">
+            <img src="./src/assets/animacao-carregamento.webp" id="gif-carregamento" alt="Caregando..." style="display: none;">
+            <div id="mensagem-erro"></div>
             <ul id="galeria-personagens"></ul>
-            <div id="paginacao">
+            <div id="paginacao" style="display: none;">
                 <p id="paginas"></p>
                 <div id="botoes-paginacao">
                     <button id="pagina-anterior" class="botao-paginacao">Página Anterior</button>
