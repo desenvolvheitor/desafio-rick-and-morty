@@ -15,19 +15,3 @@ export async function buscarPersonagens(filtros) {
         return resposta.status
     }
 }
-
-export async function buscarPersonagemPorId(id) {
-    try {
-        const url = `https://rickandmortyapi.com/api/character/${id}`
-        const resposta = await fetch(url)
-
-        if (!resposta.ok) {
-            throw new Error(`Erro na rede: ${resposta.status}`)
-        }
-
-        const dados = await resposta.json()
-        return dados
-    } catch (erro) {
-        console.error(`Erro ao buscar dados: ${erro}`)
-    }
-}
