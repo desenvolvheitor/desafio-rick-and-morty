@@ -14,7 +14,6 @@
 * {
     margin: 0;
     padding: 0;
-    /* border: 0; */
     box-sizing: border-box;
 }
 
@@ -43,12 +42,17 @@ header {
     height: 6dvh;
     padding: 2px 30px;
     border-bottom: 1px solid var(--tertiary-color);
+    min-height: 50px;
 }
 
 #logo-titulo {
     display: flex;
     align-items: center;
     height: 100%;
+}
+
+#menu-hamburguer {
+    display: none;
 }
 
 #logo-titulo img {
@@ -103,6 +107,7 @@ aside form div {
     color: var(--sec-text-color);
     border: none;
     border: 1px solid var(--tertiary-color);
+    padding: 5px 10px;
 }
 
 .campo-filtro:hover {
@@ -112,8 +117,7 @@ aside form div {
 }
 
 .campo-filtro:focus,
-.campo-filtro:active,
-.campo-filtro::picker {
+.campo-filtro:active {
     border: 1px solid var(--alive-color);
     transition: 0.2s ease;
 }
@@ -139,6 +143,7 @@ aside form div {
 }
 
 main {
+    position: relative;
     background-color: var(--secondary-color);
     min-height: 100%;
     overflow-y: auto;
@@ -148,8 +153,32 @@ main {
 #gif-carregamento {
     position: absolute;
     top: 50%;
-    left: 60%;
+    left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#gif-carregamento::after {
+    content: "";
+}
+
+#mensagem-erro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 70%;
+    max-width: 600px;
+}
+
+#imagem-erro {
+    width: 40%;
+}
+
+#texto-erro {
+    font-family: Orbitron, sans-serif;
+    color: var(--text-color);
+    font-weight: bold;
 }
 
 #galeria-personagens {
@@ -319,4 +348,36 @@ main {
 
 #botao-fechar-modal:hover {
     cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+    #menu-hamburguer {
+        display: block;
+        background-color: transparent;
+        border: none;
+        color: var(--text-color);
+        font-size: 20px;
+    }
+
+    #menu-hamburguer:hover {
+        cursor: pointer;
+    }
+
+    aside {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 1000;
+        background-color: var(--primary-color);
+        width: 80%;
+        height: 100vh;
+        transition: transform 0.2s ease-out;
+    }
+
+    .menu-aberto {
+        transform: translateX(0);
+    }
+
+    #container-principal {
+        grid-template-columns: 100%;
+    }
 }
