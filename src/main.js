@@ -14,6 +14,7 @@ const botaoProximaPag = document.getElementById("proxima-pagina")
 const botaoPagAnterior = document.getElementById("pagina-anterior")
 const formularioFiltros = document.querySelector("form")
 const galeriaPersonagens = document.getElementById("galeria-personagens")
+const mensagemErro = document.getElementById("mensagem-erro")
 
 const filtros = {
     page: 1,
@@ -51,8 +52,9 @@ formularioFiltros.addEventListener("submit", (event) => {
 let informacoesUltimaRequisicao = ""
 async function executarBusca() {
     galeriaPersonagens.innerHTML = ""
+    mensagemErro.innerHTML = ""
     secaoPaginacao.style.display = "none"
-    document.querySelector("main img").style.display = "block"
+    document.getElementById("gif-carregamento").style.display = "block"
     try {
         const [dados, _] = await Promise.all([
             buscarPersonagens(filtros),
@@ -60,7 +62,17 @@ async function executarBusca() {
         ])
 
         if (typeof dados === "number") {
-            // INSERIR AQUI O QUE FAZER QUANDO NÃO RETORNAR RESULTADO VÁLIDO
+            switch (dados) {
+                case 404:
+                    mensagemErro.innerHTML = `<img src="./src/assets/erro-sem-resultados.webp" alt="Erro" id="imagem-erro">
+                    <p id="texto-erro">Não foram encontrados pesonagens nos filtros selecionados.</p>`
+                    break
+                    
+                default:
+                    mensagemErro.innerHTML = `<img src="./src/assets/erro-geral.webp" alt="Erro" id="imagem-erro">
+                    <p id="texto-erro">Erro na busca.</p>`
+                    break    
+            }
         } else {
             informacoesUltimaRequisicao = dados.info
             renderizarGaleria(dados.results)
@@ -84,9 +96,9 @@ async function executarBusca() {
             }
         }
     } catch {
-        // INSERIR AQUI O QUE FAZER COM PROBLEMAS DE REDE
+        mensagemErro.innerHTML = `<p id="texto-erro">Erro de rede! Verifique sua conexão com a internet.</p>`
     } finally {
-        document.querySelector("main img").style.display = "none"
+        document.getElementById("gif-carregamento").style.display = "none"
     }
 }
 
@@ -119,4 +131,8 @@ botaoLimparFiltros.addEventListener("click", (event) => {
     filtros.species =  ""
     filtros.gender =  ""
     executarBusca()
+})
+
+document.querySelector("#menu-hamburguer").addEventListener("click", () => {
+    document.querySelector("aside").classList.toggle("menu-aberto")
 })
